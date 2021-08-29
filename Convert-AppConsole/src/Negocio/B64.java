@@ -9,7 +9,7 @@ package Negocio;
  *
  * @author rozo
  */
-public class Base64 {
+public class B64 {
     
     
     public boolean toFile (){
