@@ -35,9 +35,4 @@ public class Archivo {
         }
 
     }
-    
-    public void SaveInLocal (File file, String ruta , String nombre){
-        //grabar un archio en la ruta
-        
-    }
 }
