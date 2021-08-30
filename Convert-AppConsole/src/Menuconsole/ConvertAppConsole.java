@@ -8,6 +8,7 @@
 
 package Menuconsole;
 
+import Controller.MainController;
 import java.io.File;
 import java.util.Scanner;
 import java.nio.file.Files;
@@ -18,12 +19,12 @@ import java.util.Base64;
  * @author Kevin
  */
 public class ConvertAppConsole {
-
+    public Archivo archi = new Archivo ();
     /**
      * @param args the command line arguments
      */
     public void menu()
-    {
+    {  
         Scanner scanner = new Scanner(System.in);
 		
         System.out.println("--Convertir archivos--");
@@ -52,11 +53,15 @@ public class ConvertAppConsole {
         System.out.println("Por favor digite la ruta del archivo");
         
         String origen = scanner.next();
+        archi.setExtencionFuente(origen);
         String extension=origen.substring(origen.lastIndexOf(".") +1);
         
         //RutaDestino
         System.out.println("Por favor digite la ruta donde guardar el archivo convertido");
-        String destino = scanner.next();
+        archi.setExtencionDestino(scanner.next()); 
+        
+         System.out.println("Por favor digite el nombre del archivo convertido");
+        archi.setNombreArchivo(scanner.next());
         
         switch(opcion)
         {
@@ -184,9 +189,9 @@ public class ConvertAppConsole {
                     System.out.print("El archivo no existe");
                     break;
                 };
-               
                 
         }
+                
     }
     public void convertbase64(String origen)
     {
@@ -198,6 +203,10 @@ public class ConvertAppConsole {
                 byte[] archivobytes= Files.readAllBytes(archivo.toPath());
                 String Abase64= Base64.getEncoder().encodeToString(archivobytes);
                 System.out.print(Abase64);
+                archi.setBase64(Abase64);
+                 MainController main = new MainController();
+       main.ObJson(archi);    
+               
                 
             }else{
             System.out.print("El archivo no existe");
