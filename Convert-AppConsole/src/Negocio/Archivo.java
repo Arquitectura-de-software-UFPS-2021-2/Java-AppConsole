@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Negocio;
 
 import java.io.File;
@@ -13,26 +8,34 @@ import java.nio.file.Files;
  * @author rozo
  */
 public class Archivo {
+    
+    File file;
 
-    public static String toBase64(String origen) {
+    public Archivo(String rutaOrigen) {
+        file = new File(rutaOrigen);
+    }
+    
+    public String getName(){
+        return file.getName();
+    }
 
-        try {
-            File archivo = new File(origen);
-            if (archivo.exists()) {
+    public String toBase64() {
 
-                byte[] archivobytes = Files.readAllBytes(archivo.toPath());
+        try {                     
+            if (file.exists()) {                
+                
+                byte[] archivobytes = Files.readAllBytes(file.toPath());
                 String Abase64 = java.util.Base64.getEncoder().encodeToString(archivobytes);
-
+                System.out.println("Encode File to Base64...OK");
                 return Abase64;
+                
             } else {
-                System.out.println("no se encontro");
-                return "no";
+                return null;                
             }
 
         } catch (Exception e) {
-            System.out.print("Error" + e);
-            return "no se encontro";
+            System.out.println("Error: " + e.getMessage());
+            return null;
         }
-
     }
 }
