@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class B64 {
 
-    public static boolean toFileAndSaveInLocal(String strBase64, String rutaDestino, String nameFile) {
+    public boolean toFileAndSaveInLocal(String strBase64, String rutaDestino, String nameFile) {
 
         try {
             byte[] decodedFile = Base64.getDecoder()
@@ -25,6 +25,7 @@ public class B64 {
             Path destinationFile = Paths.get(rutaDestino, nameFile);
 
             Files.write(destinationFile, decodedFile);
+            System.out.println("Exito al convertir");
         } catch (IOException ex) {
             Logger.getLogger(B64.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());

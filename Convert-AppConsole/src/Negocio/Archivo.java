@@ -5,6 +5,7 @@
  */
 package Negocio;
 
+import Controller.MainController;
 import java.io.File;
 import java.nio.file.Files;
 
@@ -14,24 +15,26 @@ import java.nio.file.Files;
  */
 public class Archivo {
 
-    public static String toBase64(String origen) {
+    public void toBase64(String origen, String destino, String extension, String conv) {
 
         try {
+            MainController m=new MainController();
             File archivo = new File(origen);
             if (archivo.exists()) {
-
+                
+                String nombrearchivo = archivo.getName();
                 byte[] archivobytes = Files.readAllBytes(archivo.toPath());
                 String Abase64 = java.util.Base64.getEncoder().encodeToString(archivobytes);
-
-                return Abase64;
+                m.RequestJson(nombrearchivo, Abase64, destino, extension, conv);
+                
             } else {
                 System.out.println("no se encontro");
-                return "no";
+                
             }
 
         } catch (Exception e) {
             System.out.print("Error" + e);
-            return "no se encontro";
+            
         }
 
     }

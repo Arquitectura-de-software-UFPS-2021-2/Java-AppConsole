@@ -9,22 +9,23 @@
 package Menuconsole;
 
 import Controller.MainController;
-import java.io.File;
+import Negocio.Archivo;
 import java.util.Scanner;
-import java.nio.file.Files;
-import java.util.Base64;
+
 
 /**
  *
  * @author Kevin
  */
 public class ConvertAppConsole {
-    public Archivo archi = new Archivo ();
+    
     /**
      * @param args the command line arguments
      */
     public void menu()
     {  
+        Archivo a=new Archivo();
+        MainController m= new MainController();
         Scanner scanner = new Scanner(System.in);
 		
         System.out.println("--Convertir archivos--");
@@ -41,9 +42,10 @@ public class ConvertAppConsole {
         System.out.println("11. Convertir ODP a PPTX");
         System.out.println("12. Convertir PPTX a ODP");
         System.out.println("0. Salir");
-        System.out.println("Por favor digite la opcion deseada");
+        System.out.println("Por favor digite la opción deseada");
         
-        int opcion=scanner.nextInt();
+        while(!scanner.hasNextInt()) scanner.next();
+        int opcion= scanner.nextInt();
         
         if(opcion==0)
         {
@@ -53,15 +55,11 @@ public class ConvertAppConsole {
         System.out.println("Por favor digite la ruta del archivo");
         
         String origen = scanner.next();
-        archi.setExtencionFuente(origen);
         String extension=origen.substring(origen.lastIndexOf(".") +1);
         
         //RutaDestino
         System.out.println("Por favor digite la ruta donde guardar el archivo convertido");
-        archi.setExtencionDestino(scanner.next()); 
-        
-         System.out.println("Por favor digite el nombre del archivo convertido");
-        archi.setNombreArchivo(scanner.next());
+        String destino = scanner.next();
         
         switch(opcion)
         {
@@ -71,7 +69,7 @@ public class ConvertAppConsole {
             case 1:
                 if("docx".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "PDF");
                     menu();
                     
                 }else{
@@ -82,7 +80,7 @@ public class ConvertAppConsole {
                 
                 if("odt".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "PDF");
                     menu();
                     
                 }else{
@@ -92,7 +90,7 @@ public class ConvertAppConsole {
             case 3:
                 if("odt".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "DOCX");
                     menu();
                     
                 }else{
@@ -102,7 +100,7 @@ public class ConvertAppConsole {
             case 4:
                 if("docx".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "ODT");
                     menu();
                     
                 }else{
@@ -112,7 +110,7 @@ public class ConvertAppConsole {
             case 5:
                 if("xlsx".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "PDF");
                     menu();
                     
                 }else{
@@ -122,7 +120,7 @@ public class ConvertAppConsole {
             case 6:
                 if("ods".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "PDF");
                     menu();
                     
                 }else{
@@ -132,7 +130,7 @@ public class ConvertAppConsole {
             case 7:
                 if("ods".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "XLSX");
                     menu();
                     
                 }else{
@@ -142,7 +140,7 @@ public class ConvertAppConsole {
             case 8:
                 if("xlsx".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "ODS");
                     menu();
                     
                 }else{
@@ -152,7 +150,7 @@ public class ConvertAppConsole {
             case 9:
                 if("pptx".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "PDF");
                     menu();
                     
                 }else{
@@ -162,7 +160,7 @@ public class ConvertAppConsole {
             case 10:
                 if("odp".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "PDF");
                     menu();
                     
                 }else{
@@ -172,7 +170,7 @@ public class ConvertAppConsole {
             case 11:
                 if("odp".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "PPTX");
                     menu();
                     
                 }else{
@@ -182,39 +180,18 @@ public class ConvertAppConsole {
             case 12:
                 if("pptx".equals(extension))
                 {
-                    convertbase64(origen);
+                    a.toBase64(origen, destino, extension.toUpperCase(), "ODP");
                     menu();
                     
                 }else{
                     System.out.print("El archivo no existe");
                     break;
                 };
-                
-        }
-                
-    }
-    public void convertbase64(String origen)
-    {
-        try {
-            File archivo = new File(origen);
-            if(archivo.exists())
-            {
-                
-                byte[] archivobytes= Files.readAllBytes(archivo.toPath());
-                String Abase64= Base64.getEncoder().encodeToString(archivobytes);
-                System.out.print(Abase64);
-                archi.setBase64(Abase64);
-                 MainController main = new MainController();
-       main.ObJson(archi);    
+            default:
+                break;
                
                 
-            }else{
-            System.out.print("El archivo no existe");
-            }
-            
-        } catch (Exception e) {
-            System.out.print("Error" + e);
-        }
+        }    
         
         
     }
