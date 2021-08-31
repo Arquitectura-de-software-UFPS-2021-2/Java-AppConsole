@@ -28,29 +28,30 @@ public class ConvertAppConsole {
 
     public void menu() {
         Scanner scanner = new Scanner(System.in);
-
+// imprime las opciones
         System.out.println("Por favor digite la opción deseada\n");
         for (int i = 1; i < EXT.length; i++) {
             System.out.println(i + ". Convert " + EXT[i][0] + " to " + EXT[i][1]);
         }
-        System.out.println("0. Salir");
+        System.out.println("0. Exit");
 
         System.out.print("Option: ");
         while (!scanner.hasNextInt()) {
             System.out.print("Option: ");
             scanner.next();
         }
-        
+        //opcion que escribe el usuario
         int opcion = scanner.nextInt();
         if (opcion == 0) System.exit(0);
-
-        System.out.print("Ruta origen del archivo (0 para cancelar):  ");
+//valida que presione 0 para salir
+        System.out.print("Ruta origen del archivo , nombre y extencion: ejemplo C:Users\\Documentos\\archivo.docx (0 para cancelar):  ");
         String rutaOrigen = scanner.next();
         if (rutaOrigen.equals("0")) menu();
+        //divide la extencion de la ruta
         String extensionFuente = rutaOrigen.substring(rutaOrigen.lastIndexOf(".") + 1);
 
         //RutaDestino
-        System.out.print("Ruta destino del archivo convertido (0 para cancelar):  ");
+        System.out.print("Ruta destino del archivo convertido ejemplo  ejemplo C:Users\\Documentos\\  (0 para cancelar):  ");
         String rutaDestino = scanner.next();
         if (rutaDestino.equals("0")) menu();
 
