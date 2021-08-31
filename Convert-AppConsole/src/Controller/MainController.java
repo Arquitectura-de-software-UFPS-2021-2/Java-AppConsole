@@ -27,8 +27,8 @@ public class MainController {
 
         JSONObject obj = new JSONObject();
         obj.put("base64", archi.getBase64());
-        obj.put("extencionDestino", archi.getExtencionDestino());
-        obj.put("extencionFuente", archi.getExtencionFuente());
+        obj.put("extensionDestino","ODT");// archi.getExtencionDestino());
+        obj.put("extensionFuente", "DOCX");//archi.getExtencionFuente());
         obj.put("nombreArchivo", archi.getNombreArchivo());
 
         try {
