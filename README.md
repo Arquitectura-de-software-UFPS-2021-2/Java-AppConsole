@@ -61,5 +61,5 @@ C:\Users\USUARIO\Documents\
 ## Autores
 - [KevinJimenez]()
 - [Lonardo Vivas]()
-- [Jose]()
+- [Jose eduardo rozo molina]()
 - [Eduardo]()
