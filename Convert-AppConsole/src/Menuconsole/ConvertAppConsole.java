@@ -1,17 +1,7 @@
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Menuconsole;
 
-import java.io.File;
+import Controller.Controller;
 import java.util.Scanner;
-import java.nio.file.Files;
-import java.util.Base64;
 
 /**
  *
@@ -19,202 +9,63 @@ import java.util.Base64;
  */
 public class ConvertAppConsole {
 
-    /**
-     * @param args the command line arguments
-     */
-    public void menu()
-    {
+    public static final String ERROR_NO_FILE = "Error: El archivo no existe!";
+    public static final String[][] EXT = {
+        {"", ""},
+        {"DOCX", "PDF"},
+        {"DOCX", "ODT"},
+        {"ODT", "PDF"},
+        {"ODT", "DOCX"},
+        {"XLSX", "PDF"},
+        {"XLSX", "ODS"},
+        {"ODS", "PDF"},
+        {"ODS", "XLSX"},
+        {"PPTX", "PDF"},
+        {"PPTX", "ODP"},
+        {"ODP", "PDF"},
+        {"ODP", "PPTX"}
+    };
+
+    public void menu() {
         Scanner scanner = new Scanner(System.in);
-		
-        System.out.println("--Convertir archivos--");
-        System.out.println("1. Convertir DOCX a PDF");
-        System.out.println("2. Convertir ODT a PDF");
-        System.out.println("3. Convertir ODT a DOCX");
-        System.out.println("4. Convertir DOCX a ODT");
-        System.out.println("5. Convertir XLSX a PDF");
-        System.out.println("6. Convertir ODS a PDF");
-        System.out.println("7. Convertir ODS a XLSX");
-        System.out.println("8. Convertir XLSX a ODS");
-        System.out.println("9. Convertir PPTX a PDF");
-        System.out.println("10. Convertir ODP a PDF");
-        System.out.println("11. Convertir ODP a PPTX");
-        System.out.println("12. Convertir PPTX a ODP");
-        System.out.println("0. Salir");
-        System.out.println("Por favor digite la opcion deseada");
-        
-        int opcion=scanner.nextInt();
-        
-        if(opcion==0)
-        {
-            System.exit(0);
+// imprime las opciones
+        System.out.println("Por favor digite la opción deseada\n");
+        for (int i = 1; i < EXT.length; i++) {
+            System.out.println(i + ". Convert " + EXT[i][0] + " to " + EXT[i][1]);
         }
-        
-        System.out.println("Por favor digite la ruta del archivo");
-        
-        String origen = scanner.next();
-        String extension=origen.substring(origen.lastIndexOf(".") +1);
-        
+        System.out.println("0. Exit");
+
+        System.out.print("Option: ");
+        while (!scanner.hasNextInt()) {
+            System.out.print("Option: ");
+            scanner.next();
+        }
+        //opcion que escribe el usuario
+        int opcion = scanner.nextInt();
+        if (opcion == 0) System.exit(0);
+//valida que presione 0 para salir
+        System.out.print("Ruta origen del archivo , nombre y extencion: ejemplo C:Users\\Documentos\\archivo.docx (0 para cancelar):  ");
+        String rutaOrigen = scanner.next();
+        if (rutaOrigen.equals("0")) menu();
+        //divide la extencion de la ruta
+        String extensionFuente = rutaOrigen.substring(rutaOrigen.lastIndexOf(".") + 1);
+
         //RutaDestino
-        System.out.println("Por favor digite la ruta donde guardar el archivo convertido");
-        String destino = scanner.next();
-        
-        switch(opcion)
-        {
-            
-            case 0:
-                break;
-            case 1:
-                if("docx".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 2:
-                
-                if("odt".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 3:
-                if("odt".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 4:
-                if("docx".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 5:
-                if("xlsx".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 6:
-                if("ods".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 7:
-                if("ods".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 8:
-                if("xlsx".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                }
-            case 9:
-                if("pptx".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 10:
-                if("odp".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 11:
-                if("odp".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-            case 12:
-                if("pptx".equals(extension))
-                {
-                    convertbase64(origen);
-                    menu();
-                    
-                }else{
-                    System.out.print("El archivo no existe");
-                    break;
-                };
-               
-                
+        System.out.print("Ruta destino del archivo convertido ejemplo  ejemplo C:Users\\Documentos\\  (0 para cancelar):  ");
+        String rutaDestino = scanner.next();
+        if (rutaDestino.equals("0")) menu();
+
+        if (EXT[opcion][0].equalsIgnoreCase(extensionFuente)) {
+            String response = Controller.convert(rutaOrigen, rutaDestino, extensionFuente.toUpperCase(), EXT[opcion][1]);
+            System.out.println(response);
+            menu();
+        } else {
+            System.out.println(ERROR_NO_FILE);
         }
     }
-    public void convertbase64(String origen)
-    {
-        try {
-            File archivo = new File(origen);
-            if(archivo.exists())
-            {
-                
-                byte[] archivobytes= Files.readAllBytes(archivo.toPath());
-                String Abase64= Base64.getEncoder().encodeToString(archivobytes);
-                System.out.print(Abase64);
-                
-            }else{
-            System.out.print("El archivo no existe");
-            }
-            
-        } catch (Exception e) {
-            System.out.print("Error" + e);
-        }
-        
-        
-    }
-   
-    
+
     public static void main(String[] args) {
-        // TODO code application logic here
-        ConvertAppConsole c=new ConvertAppConsole();
+        ConvertAppConsole c = new ConvertAppConsole();
         c.menu();
     }
-    
 }
