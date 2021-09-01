@@ -23,7 +23,7 @@ public class B64 {
 
         try {
             byte[] decodedFile = Base64.getDecoder()
-                    .decode(base64.getBytes(StandardCharsets.UTF_8));
+                    .decode(base64.getBytes(StandardCharsets.ISO_8859_1));
             Path destinationFile = Paths.get(rutaDestino, nameFile);
 
             Files.write(destinationFile, decodedFile);

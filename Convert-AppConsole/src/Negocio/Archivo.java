@@ -13,6 +13,7 @@ public class Archivo {
 
     public Archivo(String rutaOrigen) {
         file = new File(rutaOrigen);
+        System.out.println(rutaOrigen);
     }
     
     public String getName(){
@@ -30,6 +31,7 @@ public class Archivo {
                 return Abase64;
                 
             } else {
+                System.out.println("File not found!");
                 return null;                
             }
 

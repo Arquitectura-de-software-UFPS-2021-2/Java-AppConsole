@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import java.io.*;
 import java.net.*;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -50,7 +51,7 @@ public class Controller {
             StringBuilder sb = new StringBuilder();
             int HttpResult = con.getResponseCode();
             if (HttpResult == HttpURLConnection.HTTP_OK) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
 
                 String line = null;
 
@@ -89,7 +90,7 @@ public class Controller {
         if(jsonRequest==null) return "Create json request...FAIL";
         
         String rutaDestino="";
-        String rutaarray [] =  rutaOrigen.split(file.getName());
+        String rutaarray [] =  rutaOrigen.split(Pattern.quote(file.getName()));
         if(rutaarray.length!=0)rutaDestino=rutaarray[0];     
       
         JSONObject jsonResponse = requestPost(URL_POST, jsonRequest, rutaDestino);

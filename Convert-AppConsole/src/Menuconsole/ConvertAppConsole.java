@@ -27,9 +27,9 @@ public class ConvertAppConsole {
     };
 
     public void menu() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "ISO-8859-1");
 // imprime las opciones
-        System.out.println("Por favor digite la opción deseada\n");
+        System.out.println("Por favor digite la opcion deseada\n");
         for (int i = 1; i < EXT.length; i++) {
             System.out.println(i + ". Convert " + EXT[i][0] + " to " + EXT[i][1]);
         }
@@ -45,7 +45,8 @@ public class ConvertAppConsole {
         if (opcion == 0) System.exit(0);
 //valida que presione 0 para salir
         System.out.print("Ruta origen del archivo , nombre y extension: ejemplo Home\\Users\\archivo.docx (0 para cancelar):  ");
-        String rutaOrigen = scanner.next();
+        scanner.nextLine();
+        String rutaOrigen = scanner.nextLine();
         if (rutaOrigen.equals("0")) menu();
         
         //divide la extencion de la ruta
@@ -54,11 +55,12 @@ public class ConvertAppConsole {
 
         if (EXT[opcion][0].equalsIgnoreCase(extensionFuente)) {
             String response = Controller.convert(rutaOrigen, extensionFuente.toUpperCase(), EXT[opcion][1]);
-            System.out.println(response);
-            menu();
+            System.out.println(response);            
         } else {
             System.out.println(ERROR_NO_FILE);
         }
+        System.out.println(""); 
+        menu();
     }
 
     public static void main(String[] args) {
