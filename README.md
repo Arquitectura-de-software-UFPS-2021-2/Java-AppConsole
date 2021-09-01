@@ -20,7 +20,7 @@ Software que convierte ficheros en formato Microsoft Office a ficheros en format
 ```bash
 java -jar DoconverJavaConsole.jar 
 ```
-- o ejecutar el archivo ejecutar exe.bat o ejecutar jar.bat (Windows)
+- o ejecutar el archivo EjecutableWin.bat (Windows)
 
 ## Uso
 
@@ -48,15 +48,10 @@ Option:
 - Paso 1: Digitamos la opción deseada y posteriormente la ruta del archivo a convertir.
 ```bash
 Option: 1
-Ruta origen del archivo (0 para cancelar):  C:/FILE.DOCX
+Ruta origen del archivo , nombre(Nombre sin espacios) y extension: ejemplo Home\Users\archivo.docx (0 para cancelar):  C:/FILE.DOCX
 ```
 
-- Paso 2: Digitamos la ruta destino del archivo convertido.
-```bash
-Ruta destino del archivo convertido (0 para cancelar):  D:/
-```
-
-- Paso 3: Se mostrará el estado de cada proceso de conversión y la ruta de destino.
+- Paso 2: Se mostrará el estado de cada proceso de conversión y la ruta de destino.
 ```bash
 Encode File to Base64...OK
 Create json request...OK
