@@ -28,10 +28,11 @@ public class B64 {
 
             Files.write(destinationFile, decodedFile);
             System.out.println("Converted file...OK");
-            return "";
+            return destinationFile.toString();
         } catch (IOException ex) {            
-            System.out.println(ex.getMessage());
-            return null;
+            System.out.println("Error guardando los archivo: "+ex.getMessage());
+            System.out.println(rutaDestino);
+            return "";
         }
 
     }

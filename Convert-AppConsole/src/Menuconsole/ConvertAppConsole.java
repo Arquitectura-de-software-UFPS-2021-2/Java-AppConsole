@@ -44,19 +44,16 @@ public class ConvertAppConsole {
         int opcion = scanner.nextInt();
         if (opcion == 0) System.exit(0);
 //valida que presione 0 para salir
-        System.out.print("Ruta origen del archivo , nombre y extencion: ejemplo C:Users\\Documentos\\archivo.docx (0 para cancelar):  ");
+        System.out.print("Ruta origen del archivo , nombre y extension: ejemplo Home\\Users\\archivo.docx (0 para cancelar):  ");
         String rutaOrigen = scanner.next();
         if (rutaOrigen.equals("0")) menu();
+        
         //divide la extencion de la ruta
         String extensionFuente = rutaOrigen.substring(rutaOrigen.lastIndexOf(".") + 1);
-
-        //RutaDestino
-        System.out.print("Ruta destino del archivo convertido ejemplo  ejemplo C:Users\\Documentos\\  (0 para cancelar):  ");
-        String rutaDestino = scanner.next();
-        if (rutaDestino.equals("0")) menu();
+      
 
         if (EXT[opcion][0].equalsIgnoreCase(extensionFuente)) {
-            String response = Controller.convert(rutaOrigen, rutaDestino, extensionFuente.toUpperCase(), EXT[opcion][1]);
+            String response = Controller.convert(rutaOrigen, extensionFuente.toUpperCase(), EXT[opcion][1]);
             System.out.println(response);
             menu();
         } else {

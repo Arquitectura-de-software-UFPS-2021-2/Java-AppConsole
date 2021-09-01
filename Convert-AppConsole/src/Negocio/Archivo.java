@@ -38,4 +38,9 @@ public class Archivo {
             return null;
         }
     }
+    
+    public File getfile (){
+        return file;
+    }
+    
 }

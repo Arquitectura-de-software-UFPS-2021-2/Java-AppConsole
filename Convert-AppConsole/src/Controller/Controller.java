@@ -79,7 +79,7 @@ public class Controller {
 
     }
     
-    public static String convert(String rutaOrigen, String rutaDestino, String extensionFuente, String extensionDestino) {
+    public static String convert(String rutaOrigen,  String extensionFuente, String extensionDestino) {
         Archivo file = new Archivo(rutaOrigen);
         
         String base64Fuente = file.toBase64();        
@@ -88,6 +88,10 @@ public class Controller {
         JSONObject jsonRequest = createRequestJson(file.getName(), base64Fuente, extensionFuente, extensionDestino);
         if(jsonRequest==null) return "Create json request...FAIL";
         
+        String rutaDestino="";
+        String rutaarray [] =  rutaOrigen.split(file.getName());
+        if(rutaarray.length!=0)rutaDestino=rutaarray[0];     
+      
         JSONObject jsonResponse = requestPost(URL_POST, jsonRequest, rutaDestino);
         if(jsonResponse==null) return "Response file...FAIL";        
         String base64Converted = (String) jsonResponse.get("base64");
@@ -95,8 +99,8 @@ public class Controller {
         
         B64 base64 = new B64(base64Converted);        
         String resultSavingFile = base64.toFileInLocal(rutaDestino, nameFileConverted);
-        if(resultSavingFile==null) return "Saving file...FAIL";        
+        if(resultSavingFile=="") return "Saving file...FAIL";        
         
-        return "-> New file saved in path " + rutaDestino + "\n";        
+        return "-> New file saved in path " + resultSavingFile + "\n";        
     }
 }
