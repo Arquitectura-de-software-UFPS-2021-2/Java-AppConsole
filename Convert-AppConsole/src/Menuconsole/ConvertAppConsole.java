@@ -44,8 +44,10 @@ public class ConvertAppConsole {
         int opcion = scanner.nextInt();
         if (opcion == 0) System.exit(0);
 //valida que presione 0 para salir
-        System.out.print("Ruta origen del archivo , nombre y extension: ejemplo Home\\Users\\archivo.docx (0 para cancelar):  ");
-        String rutaOrigen = scanner.next();
+        System.out.print("Ruta origen del archivo , nombre(Nombre sin espacios) y extension: ejemplo Home\\Users\\archivo.docx (0 para cancelar):  ");
+        scanner.nextLine();
+        String rutaOrigen = scanner.nextLine();
+        
         if (rutaOrigen.equals("0")) menu();
         
         //divide la extencion de la ruta
