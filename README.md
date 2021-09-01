@@ -16,10 +16,11 @@ Software que convierte ficheros en formato Microsoft Office a ficheros en format
 
 ## Ejecución
 
+- Linux o Windows
 ```bash
-java -jar DoconverJavaConsole.jar
+java -jar DoconverJavaConsole.jar 
 ```
-- o ejecutar el archivo ejecutar exe.bat o ejecutar jar.bat
+- o ejecutar el archivo ejecutar exe.bat o ejecutar jar.bat (Windows)
 
 ## Uso
 
